@@ -28,7 +28,12 @@ Next, we'll look at a scatter plot of flipper length vs bill length. First, we'l
 penguins %>% 
   drop_na() %>% 
   ggplot(aes(flipper_length_mm, bill_length_mm, color=species)) +
-  geom_point()
+  geom_point() + 
+  ggtitle("Flipper Length vs. Bill Length") + 
+  xlab("Flipper Length (mm)") + 
+  ylab("Bill Length (mm)") +
+  scale_colour_discrete("Species")
+ 
 ```
 
 Then, we'll export this scatter plot to our project directory.
