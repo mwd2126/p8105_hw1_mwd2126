@@ -12,12 +12,30 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-#Problem 1
+# Problem 1
 
-First, ensure you have the "palmerpenguins" package installed. Then, we will load the `penguins` dataset:
+First, ensure you have the "palmerpenguins" package installed. Then, we'll load the `penguins` dataset:
 
-```{r}
+```{r load data}
 data("penguins", package = "palmerpenguins")
 ```
 
-The `penguins` dataset describes a sample of penguins and includes information on species, island, various body measurements (including bill length, bill depth, flipper length, and body mass), sex, and year. The dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+The `penguins` dataset describes a sample of penguins and includes information on species, island, various body measurements (including bill length (mm), bill depth (mm), flipper length (mm), and body mass), sex, and year. The dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE) %>% round(1)` mm.
+
+Next, we'll look at a scatter plot of flipper length vs bill length. First, we'll drop rows with missing data and then build our plot. 
+
+```{r build the plot}
+penguins %>% 
+  drop_na() %>% 
+  ggplot(aes(flipper_length_mm, bill_length_mm, color=species)) +
+  geom_point()
+```
+
+Then, we'll export this scatter plot to our project directory.
+
+```{r save the plot}
+ggsave("penguin_plot.jpg")
+```
+
+
+# Problem 2
