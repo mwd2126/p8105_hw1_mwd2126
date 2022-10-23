@@ -42,5 +42,26 @@ Then, we'll export this scatter plot to our project directory.
 ggsave("penguin_plot.jpg")
 ```
 
-
 # Problem 2
+
+We'll create a data frame comprised of:
+
+- a random sample of size 10 from a standard Normal distribution
+- a logical vector indicating whether elements of the sample are greater than 0
+- a character vector of length 10
+- a factor vector of length 10, with 3 different factor “levels”
+
+
+```{r create data frame}
+df <- 
+  tibble(
+    a = rnorm(10),
+    b = a > 0,
+    c = character(10),
+    d = factor(c("small", "small", "small", "medium", "medium", "medium", "medium", "large", "large", "large"))
+)
+```
+
+Now, we'll try taking the mean of each vector and see what happens.
+
+
