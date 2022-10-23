@@ -20,7 +20,7 @@ First, ensure you have the "palmerpenguins" package installed. Then, we'll load 
 data("penguins", package = "palmerpenguins")
 ```
 
-The `penguins` dataset describes a sample of penguins and includes information on species, island, various body measurements (including bill length (mm), bill depth (mm), flipper length (mm), and body mass), sex, and year. The dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE) %>% round(1)` mm.
+The `penguins` dataset describes a sample of penguins and includes information on species, island, various body measurements (including bill length (mm), bill depth (mm), flipper length (mm), and body mass(g)), sex, and year. The dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns. The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE) %>% round(1)` mm.
 
 Next, we'll look at a scatter plot of flipper length vs bill length. First, we'll drop rows with missing data and then build our plot. 
 
@@ -51,9 +51,8 @@ We'll create a data frame comprised of:
 - a character vector of length 10
 - a factor vector of length 10, with 3 different factor “levels”
 
-
 ```{r create data frame}
-df <- 
+df = 
   tibble(
     a = rnorm(10),
     b = a > 0,
@@ -63,5 +62,23 @@ df <-
 ```
 
 Now, we'll try taking the mean of each vector and see what happens.
+
+```{r take mean}
+mean(pull(df, a))
+mean(pull(df, b))
+mean(pull(df, c))
+mean(pull(df, d))
+```
+We can take the means of `a` and `b` because the former is a vector of integers and the latter is a vector of 1s and 0s, which are interpreted as TRUE and FALSE statements, respectively. However, we can't take the means of the character and factor vectors! Maybe we can try converting some of these variables to see if that solves the problem.
+
+```{r convert, results = 'hide'}
+as.numeric(pull(df, a))
+as.numeric(pull(df, c))
+as.numeric(pull(df, d))
+```
+
+This helps us take the mean for `d` (because the factors are converted to numerical values based on their alphabetical order) but not `c` (because the character vector cannot be directly converted into a numeric vector).
+
+That's a wrap on Homework 1.
 
 
